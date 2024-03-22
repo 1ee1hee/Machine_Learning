@@ -1,8 +1,25 @@
 # 평가 지표 저장 모듈
-__version__ = 1.0
+__version__ = 1.2
 
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix, recall_score, precision_score, f1_score, accuracy_score, ConfusionMatrixDisplay, average_precision_score, roc_auc_score
+from sklearn.metrics import confusion_matrix, recall_score, precision_score, f1_score, accuracy_score, ConfusionMatrixDisplay, average_precision_score, roc_auc_score, mean_squared_error, mean_absolute_error, r2_score
+
+def print_metrics_regression(y, pred, title=None):
+    """
+    회귀 모델 평가결과들을 출력하는 함수
+    MSE, RMSE, MAE, R2
+    [parameter]
+        y: ndarray - 정답(target)
+        pred: ndarray - 모델이 추론한 값
+        title: str=None - 제목
+    """
+    if title:
+        print(title)
+    mse = mean_squared_error(y, pred)
+    rmse = mean_squared_error(y, pred, squared=False)
+    mae = mean_absolute_error(y, pred)
+    r2 = r2_score(y, pred)
+    print(f"MSE:{mse:.3f}, RMSE: {rmse:.3f}, MAE: {mae:.3f}, r2: {r2:.3f}")
 
 def plot_confusion_matrix(y, pred, title=None):
     """
